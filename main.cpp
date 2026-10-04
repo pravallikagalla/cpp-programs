@@ -2,32 +2,29 @@
 using namespace std;
 class Student {
 private:
-string name;
-int roll;
+ string name;
+ int roll;
 public:
-// Constructor
+// Parameterized constructor
 Student(string n, int r) {
-name = n;
-roll = r;
-cout << "Constructor called for " << name << endl;
+ name = n;
+ roll = r;
+ cout << "Parameterized constructor called." << endl;
 }
-// Member function to display student details
+// Copy constructor
+Student(const Student &s) {
+name = s.name;
+roll = s.roll;
+cout << "Copy constructor called." << endl;
+}
 void display() {
 cout << "Name: " << name << ", Roll: " << roll << endl;
 }
-// Destructor
-~Student() {
-cout << "Destructor called for " << name << endl;
-}
 };
 int main() {
-Student s1("Alice", 101); // Constructor is called
-Student s2("Bob", 102); // Constructor is called
+Student s1("Alice", 101); // Calls parameterized
+Student s2 = s1;
 s1.display();
 s2.display();
-// When main() ends, destructors are called automatically
-13
 return 0;
 }
-Output:
-Constructor called for Alice
