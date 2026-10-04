@@ -1,69 +1,130 @@
 #include <iostream>
-#include <vector>
-#include <list>
-#include <algorithm> // For sort, reverse
 using namespace std;
+#define SIZE 5 // max size of deque
+class Deque {
+private:
+int arr[SIZE];
+int front, rear;
+public:
+Deque() {
+front = -1;
+rear = 0;
+}
+// Check if deque is full
+bool isFull() {
+return ((front == 0 && rear == SIZE - 1) || front ==
+rear + 1);
+}
+// Check if deque is empty
+bool isEmpty() {
+return (front == -1);
+}
+// Insert at front
+void insertFront(int key) {
+if (isFull()) {
+cout << "Deque is full!" << endl;
+return;
+}
+if (isEmpty()) {
+front = rear = 0;
+} else if (front == 0) {
+front = SIZE - 1;
+} else {
+front--;
+}
+arr[front] = key;
+}
+// Insert at rear
+void insertRear(int key) {
+if (isFull()) {
+cout << "Deque is full!" << endl;
+return;
+}
+if (isEmpty()) {
+front = rear = 0;
+} else if (rear == SIZE - 1) {
+rear = 0;
+} else {
+rear++;
+}
+arr[rear] = key;
+}
+// Delete from front
+void deleteFront() {
+if (isEmpty()) {
+cout << "Deque is empty!" << endl;
+return;
+}
+cout << "Deleted from front: " << arr[front] << endl;
+if (front == rear) {
+front = -1; // only one element
+rear = -1;
+} else if (front == SIZE - 1) {
+front = 0;
+} else {
+front++;
+}
+}
+// Delete from rear
+void deleteRear() {
+if (isEmpty()) {
+cout << "Deque is empty!" << endl;
+return;
+}
+cout << "Deleted from rear: " << arr[rear] << endl;
+if (front == rear) {
+front = -1;
+rear = -1;
+} else if (rear == 0) {
+rear = SIZE - 1;
+} else {
+rear--;
+}
+}
+// Get front element
+int getFront() {
+if (isEmpty()) {
+cout << "Deque is empty!" << endl;
+return -1;
+}
+return arr[front];
+}
+// Get rear element
+int getRear() {
+if (isEmpty()) {
+cout << "Deque is empty!" << endl;
+return -1;
+}
+return arr[rear];
+}
+// Display deque elements
+void display() {
+if (isEmpty()) {
+cout << "Deque is empty!" << endl;
+return;
+}
+cout << "Deque elements: ";
+int i = front;
+while (true) {
+cout << arr[i] << " ";
+if (i == rear)
+break;
+i = (i + 1) % SIZE;
+}
+cout << endl;
+}
+};
 int main() {
-cout << "=== VECTOR OPERATIONS ===" << endl;
-vector<int> v; // Declare vector
-// Insert elements
-v.push_back(10);
-v.push_back(20);
-v.push_back(5);
-v.push_back(15);
-cout << "Vector elements: ";
-for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
-cout << *it << " ";
-cout << endl;
-// Sort vector
-sort(v.begin(), v.end());
-cout << "After sorting: ";
-for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
-cout << *it << " ";
-cout << endl;
-// Reverse vector
-reverse(v.begin(), v.end());
-cout << "After reversing: ";
-for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
-cout << *it << " ";
-cout << endl;
-// Delete last element
-v.pop_back();
-cout << "After pop_back(): ";
-for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
-cout << *it << " ";
-cout << endl;
-cout << "Vector size: " << v.size() << endl;
-// ----------- LIST OPERATIONS -----------
-cout << "\n=== LIST OPERATIONS ===" << endl;
-list<int> l; // Declare list
-// Insert elements
-l.push_back(30);
-l.push_back(10);
-l.push_back(40);
-l.push_front(20); // Insert at front
-cout << "List elements: ";
-for (list<int>::iterator it = l.begin(); it != l.end(); ++it)
-cout << *it << " ";
-cout << endl;
-// Sort list
-l.sort();
-cout << "After sorting: ";
-for (list<int>::iterator it = l.begin(); it != l.end(); ++it)
-cout << *it << " ";
-cout << endl;
-// Reverse list
-l.reverse();
-cout << "After reversing: ";
-for (list<int>::iterator it = l.begin(); it != l.end(); ++it)
-cout << *it << " ";
-cout << endl;
-// Remove an element
-l.remove(20);
-cout << "After removing 20: ";
-for (list<int>::iterator it = l.begin(); it != l.end(); ++it)
-cout << *it << " ";
-cout << endl;
-cout << "List size: " << l.size() << endl;
+Deque dq;
+dq.insertRear(10);
+dq.insertRear(20);
+dq.insertFront(5);
+dq.insertFront(2);
+dq.display();
+cout << "Front element: " << dq.getFront() << endl;
+cout << "Rear element: " << dq.getRear() << endl;
+dq.deleteFront();
+dq.deleteRear();
+dq.display();
 return 0;
 }
