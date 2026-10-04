@@ -1,28 +1,10 @@
 #include <iostream>
 using namespace std;
-class Rectangle {
-private:
-int length;
-int width;
-public:
-// Constructor to initialize length and width
-Rectangle(int l, int w) {
-length = l;
-width = w;
-}
-// Declare friend function
-friend int calculateArea(Rectangle r);
-};
-// Friend function definition
-int calculateArea(Rectangle r) {
-// Accessing private members of class Rectangle
-return r.length * r.width;
+void greet(string name, string message = "Hello") {
+cout << message << ", " << name << "!" << endl;
 }
 int main() {
-Rectangle rect(10, 5); // Create object with length 10 and
-
-// Call friend function
-int area = calculateArea(rect);
-cout << "Area of Rectangle= " << area << endl;
+greet("Alice"); // Uses default message: "Hello"
+greet("Bob", "Good morning"); // Uses provided message
 return 0;
 }
