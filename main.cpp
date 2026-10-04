@@ -1,36 +1,69 @@
 #include <iostream>
+#include <vector>
+#include <list>
+#include <algorithm> // For sort, reverse
 using namespace std;
-void testFunction(int x) {
-if (x == 0) {
-throw 0; // throw int exception
-}
-else if (x == 1) {
-throw "String exception"; // throw const char*
-}
-else if (x == 2) {
-throw 3.14; // throw double exception
-}
-else {
-cout << "No exception thrown." << endl;
-}
-}
 int main() {
-for (int i = 0; i < 4; i++) {
-try {
-testFunction(i);
-}
-catch (int e) {
-cout << "Caught an integer exception: " << e << endl;
-}
-catch (const char* e) {
-cout << "Caught a string exception: " << e << endl;
-}
-catch (double e) {
-cout << "Caught a double exception: " << e << endl;
-}
-catch (...) {
-cout << "Caught an unknown exception." << endl;
-}
-}
+cout << "=== VECTOR OPERATIONS ===" << endl;
+vector<int> v; // Declare vector
+// Insert elements
+v.push_back(10);
+v.push_back(20);
+v.push_back(5);
+v.push_back(15);
+cout << "Vector elements: ";
+for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
+cout << *it << " ";
+cout << endl;
+// Sort vector
+sort(v.begin(), v.end());
+cout << "After sorting: ";
+for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
+cout << *it << " ";
+cout << endl;
+// Reverse vector
+reverse(v.begin(), v.end());
+cout << "After reversing: ";
+for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
+cout << *it << " ";
+cout << endl;
+// Delete last element
+v.pop_back();
+cout << "After pop_back(): ";
+for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
+cout << *it << " ";
+cout << endl;
+cout << "Vector size: " << v.size() << endl;
+// ----------- LIST OPERATIONS -----------
+cout << "\n=== LIST OPERATIONS ===" << endl;
+list<int> l; // Declare list
+// Insert elements
+l.push_back(30);
+l.push_back(10);
+l.push_back(40);
+l.push_front(20); // Insert at front
+cout << "List elements: ";
+for (list<int>::iterator it = l.begin(); it != l.end(); ++it)
+cout << *it << " ";
+cout << endl;
+// Sort list
+l.sort();
+cout << "After sorting: ";
+for (list<int>::iterator it = l.begin(); it != l.end(); ++it)
+cout << *it << " ";
+cout << endl;
+// Reverse list
+l.reverse();
+cout << "After reversing: ";
+for (list<int>::iterator it = l.begin(); it != l.end(); ++it)
+cout << *it << " ";
+cout << endl;
+// Remove an element
+l.remove(20);
+cout << "After removing 20: ";
+for (list<int>::iterator it = l.begin(); it != l.end(); ++it)
+cout << *it << " ";
+cout << endl;
+cout << "List size: " << l.size() << endl;
 return 0;
 }
