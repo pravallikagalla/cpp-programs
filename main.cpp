@@ -1,20 +1,28 @@
 #include <iostream>
 using namespace std;
-// Inline function to add two integers
-inline int add(int a, int b) {
-return a + b;
+class Rectangle {
+private:
+int length;
+int width;
+public:
+// Constructor to initialize length and width
+Rectangle(int l, int w) {
+length = l;
+width = w;
 }
-// Overloaded inline function to add two doubles
-inline double add(double a, double b) {
-return a + b;
-}
-// Overloaded inline function to add three integers
-inline int add(int a, int b, int c) {
-return a + b + c;
+// Declare friend function
+friend int calculateArea(Rectangle r);
+};
+// Friend function definition
+int calculateArea(Rectangle r) {
+// Accessing private members of class Rectangle
+return r.length * r.width;
 }
 int main() {
-cout << "add(5, 10) = " << add(5, 10) << endl; 
-cout << "add(2.5, 3.7) = " << add(2.5, 3.7) << endl;
-cout << "add(1, 2, 3) = " << add(1, 2, 3) << endl; 
+Rectangle rect(10, 5); // Create object with length 10 and
+
+// Call friend function
+int area = calculateArea(rect);
+cout << "Area of Rectangle = " << area << endl;
 return 0;
 }
