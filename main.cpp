@@ -1,30 +1,33 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
-class Student {
-private:
- string name;
- int roll;
-public:
-// Parameterized constructor
-Student(string n, int r) {
- name = n;
- roll = r;
- cout << "Parameterized constructor called." << endl;
+class Number{
+    private:
+    int value;
+    public:
+    Number(int v=0){
+      value=v;
 }
-// Copy constructor
-Student(const Student &s) {
-name = s.name;
-roll = s.roll;
-cout << "Copy constructor called." << endl;
+Number operator-(){
+return Number(-value);
 }
-void display() {
-cout << "Name: " << name << ", Roll: " << roll << endl;
+Number operator+(const Number&obj){
+    return Number(value+obj.value);
+}
+void display(){
+    cout<<"value="<<value<<endl;
 }
 };
-int main() {
-Student s1("Alice", 101); // Calls parameterized
-Student s2 = s1;
-s1.display();
-s2.display();
+int main(){
+    Number n1(10),n2(20),result;
+    cout<<"original values:"<<endl;
+    n1.display();
+    n2.display();
+    result=n1+n2;
+cout<<"after binary+operator(n1+n2):"<<endl;
+result.display();
+result=-n1;
+cout<<"after unary-operator(-n1):"<<endl;
+result.display();
 return 0;
 }
+
