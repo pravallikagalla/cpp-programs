@@ -1,42 +1,69 @@
 #include <iostream>
+#include <vector>
+#include <list>
+#include <algorithm> // For sort, reverse
 using namespace std;
-class Number {
-private:
-int value;
-public:
-// Constructor
-Number(int v = 0) {
-value = v;
-}
-// Friend function to overload unary minus (-)
-friend Number operator-(Number n);
-// Friend function to overload binary plus (+)
-friend Number operator+(Number n1, Number n2);
-// Display function
-void display() {
-cout << "Value = " << value << endl;
-}
-};
-// Unary minus operator using friend function
-Number operator-(Number n) {
-return Number(-n.value);
-}
-// Binary addition operator using friend function
-Number operator+(Number n1, Number n2) {
-return Number(n1.value + n2.value);
-}
 int main() {
-Number a(15), b(5), result;
-cout << "Original values:" << endl;
-a.display();
-b.display();
-// Binary operator +
-result = a + b;
-cout << "After Binary + Operator (a + b):" << endl;
-result.display();
-// Unary operator -
-result = -a;
-cout << "After Unary - Operator (-a):" << endl;
-result.display();
+cout << "=== VECTOR OPERATIONS ===" << endl;
+vector<int> v; // Declare vector
+// Insert elements
+v.push_back(10);
+v.push_back(20);
+v.push_back(5);
+v.push_back(15);
+cout << "Vector elements: ";
+for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
+cout << *it << " ";
+cout << endl;
+// Sort vector
+sort(v.begin(), v.end());
+cout << "After sorting: ";
+for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
+cout << *it << " ";
+cout << endl;
+// Reverse vector
+reverse(v.begin(), v.end());
+cout << "After reversing: ";
+for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
+cout << *it << " ";
+cout << endl;
+// Delete last element
+v.pop_back();
+cout << "After pop_back(): ";
+for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
+cout << *it << " ";
+cout << endl;
+cout << "Vector size: " << v.size() << endl;
+// ----------- LIST OPERATIONS -----------
+cout << "\n=== LIST OPERATIONS ===" << endl;
+list<int> l; // Declare list
+// Insert elements
+l.push_back(30);
+l.push_back(10);
+l.push_back(40);
+l.push_front(20); // Insert at front
+cout << "List elements: ";
+for (list<int>::iterator it = l.begin(); it != l.end(); ++it)
+cout << *it << " ";
+cout << endl;
+// Sort list
+l.sort();
+cout << "After sorting: ";
+for (list<int>::iterator it = l.begin(); it != l.end(); ++it)
+cout << *it << " ";
+cout << endl;
+// Reverse list
+l.reverse();
+cout << "After reversing: ";
+for (list<int>::iterator it = l.begin(); it != l.end(); ++it)
+cout << *it << " ";
+cout << endl;
+// Remove an element
+l.remove(20);
+cout << "After removing 20: ";
+for (list<int>::iterator it = l.begin(); it != l.end(); ++it)
+cout << *it << " ";
+cout << endl;
+cout << "List size: " << l.size() << endl;
 return 0;
 }
