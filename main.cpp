@@ -1,130 +1,31 @@
 #include <iostream>
+#include <cmath> // for sqrt()
 using namespace std;
-#define SIZE 5 // max size of deque
-class Deque {
-private:
-int arr[SIZE];
-int front, rear;
-public:
-Deque() {
-front = -1;
-rear = 0;
-}
-// Check if deque is full
-bool isFull() {
-return ((front == 0 && rear == SIZE - 1) || front ==
-rear + 1);
-}
-// Check if deque is empty
-bool isEmpty() {
-return (front == -1);
-}
-// Insert at front
-void insertFront(int key) {
-if (isFull()) {
-cout << "Deque is full!" << endl;
-return;
-}
-if (isEmpty()) {
-front = rear = 0;
-} else if (front == 0) {
-front = SIZE - 1;
-} else {
-front--;
-}
-arr[front] = key;
-}
-// Insert at rear
-void insertRear(int key) {
-if (isFull()) {
-cout << "Deque is full!" << endl;
-return;
-}
-if (isEmpty()) {
-front = rear = 0;
-} else if (rear == SIZE - 1) {
-rear = 0;
-} else {
-rear++;
-}
-arr[rear] = key;
-}
-// Delete from front
-void deleteFront() {
-if (isEmpty()) {
-cout << "Deque is empty!" << endl;
-return;
-}
-cout << "Deleted from front: " << arr[front] << endl;
-if (front == rear) {
-front = -1; // only one element
-rear = -1;
-} else if (front == SIZE - 1) {
-front = 0;
-} else {
-front++;
-}
-}
-// Delete from rear
-void deleteRear() {
-if (isEmpty()) {
-cout << "Deque is empty!" << endl;
-return;
-}
-cout << "Deleted from rear: " << arr[rear] << endl;
-if (front == rear) {
-front = -1;
-rear = -1;
-} else if (rear == 0) {
-rear = SIZE - 1;
-} else {
-rear--;
-}
-}
-// Get front element
-int getFront() {
-if (isEmpty()) {
-cout << "Deque is empty!" << endl;
-return -1;
-}
-return arr[front];
-}
-// Get rear element
-int getRear() {
-if (isEmpty()) {
-cout << "Deque is empty!" << endl;
-return -1;
-}
-return arr[rear];
-}
-// Display deque elements
-void display() {
-if (isEmpty()) {
-cout << "Deque is empty!" << endl;
-return;
-}
-cout << "Deque elements: ";
-int i = front;
-while (true) {
-cout << arr[i] << " ";
-if (i == rear)
-break;
-i = (i + 1) % SIZE;
-}
-cout << endl;
-}
-};
 int main() {
-Deque dq;
-dq.insertRear(10);
-dq.insertRear(20);
-dq.insertFront(5);
-dq.insertFront(2);
-dq.display();
-cout << "Front element: " << dq.getFront() << endl;
-cout << "Rear element: " << dq.getRear() << endl;
-dq.deleteFront();
-dq.deleteRear();
-dq.display();
+double a, b, c;
+double discriminant, root1, root2, realPart, imaginaryPart;
+// Input coefficients
+cout << "Enter coefficients a, b and c: ";
+cin >> a >> b >> c;
+// Calculate discriminant
+discriminant = b*b - 4*a*c;
+// Check if roots are real, equal, or complex
+if (discriminant > 0) {
+root1 = (-b + sqrt(discriminant)) / (2*a);
+root2 = (-b - sqrt(discriminant)) / (2*a);
+cout << "Roots are real and different." << endl;
+cout << "Root 1 = " << root1 << endl;
+cout << "Root 2 = " << root2 << endl;
+} else if (discriminant == 0) {
+root1 = -b / (2*a);
+cout << "Roots are real and equal." << endl;
+cout << "Root = " << root1 << endl;
+} else {
+realPart = -b / (2*a);
+imaginaryPart = sqrt(-discriminant) / (2*a);
+cout << "Roots are complex and imaginary." << endl;
+cout << "Root 1 = " << realPart << " + " <<imaginaryPart << "i" << endl;
+cout << "Root 2 = " << realPart << " - " <<imaginaryPart << "i" << endl;
+}
 return 0;
 }
