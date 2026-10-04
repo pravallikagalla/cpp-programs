@@ -1,59 +1,26 @@
 #include <iostream>
-#include <cmath> // For M_PI constant
 using namespace std;
-// Abstract class
-class Shape {
+class Base {
 public:
-// Pure virtual function
-virtual float area() = 0;
-};
-// Derived class for Rectangle
-class Rectangle : public Shape {
-private:
-float length, breadth;
-public:
-Rectangle(float l, float b) {
-length = l;
-breadth = b;
+Base() {
+cout << "Base class constructor called." << endl;
 }
-float area() override {
-return length * breadth;
+~Base() {
+cout << "Base class destructor called." << endl;
 }
 };
-class Circle : public Shape {
-private:
-float radius;
+class Derived : public Base {
 public:
-Circle(float r) {
-radius = r;
+Derived() {
+cout << "Derived class constructor called." << endl;
 }
-float area() override {
-return M_PI * radius * radius;
+~Derived() {
+cout << "Derived class destructor called." << endl;
 }
 };
-class Triangle : public Shape {
-private:
-float base, height;
-public:
-Triangle(float b, float h) {
-base = b;
-height = h;
-}
-float area() override {
-return 0.5 * base * height;
-}
-};
-// Main function
 int main() {
-Shape* shape; Rectangle rect(10, 5);
-// Base class pointer
-Circle circ(7);
-Triangle tri(8, 6);
-shape = &rect;
-cout << "Area of Rectangle: " << shape->area() << endl;
-shape = &circ;
-cout << "Area of Circle: " << shape->area() << endl;
-shape = &tri;
-cout << "Area of Triangle: " << shape->area() << endl;
+cout << "Creating object of Derived class..." << endl;
+Derived obj;
+cout << "Object created. Exiting main..." << endl;
 return 0;
 }
