@@ -1,131 +1,59 @@
 #include <iostream>
+#include <cmath> // For M_PI constant
 using namespace std;
-//////////////////////
-// Single Inheritance
-//////////////////////
-class Animal {
-public:
-void eat() {
-cout << "Animal is eating." << endl;
-}
-};
-class Dog : public Animal {// Single inheritance
-public:
-void bark() {
-cout << "Dog is barking." << endl;
-}
-};
-// Multiple Inheritance
-class A {
-public:
-void displayA() {
-cout << "Class A" << endl;
-   }
-};
-class B {
-public:
-void displayB() {
-cout << "Class B" << endl;
-}
-};
-class C : public A, public B { // Multiple inheritance
-public:
-void displayC() {
-cout << "Class C (derived from A and B)" << endl;
-}
-};
-// Multilevel Inheritance
-class Vehicle {
-public:
-void move() {
-cout << "Vehicle is moving." << endl;
-}
-};
-class Car : public Vehicle {
-public:
-void start() {
-cout << "Car started." << endl;
-}
-};
-class SportsCar : public Car {
-public:
-void turbo() {
-cout << "SportsCar in turbo mode!" << endl;
-}
-};
-// Hierarchical Inheritance
+// Abstract class
 class Shape {
 public:
-void draw() {
-cout << "Drawing a shape." << endl;
+// Pure virtual function
+virtual float area() = 0;
+};
+// Derived class for Rectangle
+class Rectangle : public Shape {
+private:
+float length, breadth;
+public:
+Rectangle(float l, float b) {
+length = l;
+breadth = b;
+}
+float area() override {
+return length * breadth;
 }
 };
 class Circle : public Shape {
+private:
+float radius;
 public:
-void area() {
-cout << "Area of Circle = πr²" << endl;
+Circle(float r) {
+radius = r;
+}
+float area() override {
+return M_PI * radius * radius;
 }
 };
-class Square : public Shape {
+class Triangle : public Shape {
+private:
+float base, height;
 public:
-void area() {
-cout << "Area of Square = a²" << endl;
+Triangle(float b, float h) {
+base = b;
+height = h;
+}
+float area() override {
+return 0.5 * base * height;
 }
 };
-// Hybrid Inheritance
-class Person {
-public:
-void speak() {
-cout << "Person speaks." << endl;
-}
-};
-class Student : public Person {
-public:
-void study() {
-cout << "Student is studying." << endl;
-}
-};
-class Employee {
-public:
-void work() {
-cout << "Employee is working." << endl;
-}
-};
-class WorkingStudent:public Student, public Employee { //
-//Hybrid (Student from Person + Employee)
-public:
-void balance() {
-cout << "Working student balances work and study." <<endl;
-}
-};
-// Main
+// Main function
 int main() {
-cout << "=== Single Inheritance ===" << endl;
-Dog d;
-d.eat();
-d.bark();
-cout << "\n=== Multiple Inheritance ===" << endl;
-C objC;
-objC.displayA();
-objC.displayB();
-objC.displayC();
-cout << "\n=== Multilevel Inheritance ===" << endl;
-SportsCar sc;
-sc.move();
-sc.start();
-sc.turbo();
-cout << "\n=== Hierarchical Inheritance ===" << endl;
-Circle c;
-Square s;
-c.draw();
-c.area();
-s.draw();
-s.area();
-cout << "\n=== Hybrid Inheritance ===" << endl;
-WorkingStudent ws;
-ws.speak();
-ws.study();
-ws.work();
-ws.balance();
+Shape* shape; Rectangle rect(10, 5);
+// Base class pointer
+Circle circ(7);
+Triangle tri(8, 6);
+shape = &rect;
+cout << "Area of Rectangle: " << shape->area() << endl;
+shape = &circ;
+cout << "Area of Circle: " << shape->area() << endl;
+shape = &tri;
+cout << "Area of Triangle: " << shape->area() << endl;
 return 0;
 }
