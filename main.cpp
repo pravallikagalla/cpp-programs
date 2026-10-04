@@ -1,33 +1,20 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-class Number{
-    private:
-    int value;
-    public:
-    Number(int v=0){
-      value=v;
+int divide(int a, int b) {
+if (b == 0) {
+throw "Division by zero error!"; // throw an exception
 }
-Number operator-(){
-return Number(-value);
+return a / b;
 }
-Number operator+(const Number&obj){
-    return Number(value+obj.value);
+int main() {
+int x = 10, y = 0;
+try {
+int result = divide(x, y);
+cout << "Result: " << result << endl;
 }
-void display(){
-    cout<<"value="<<value<<endl;
+catch (const char* msg) {
+cout << "Exception caught: " << msg << endl;
 }
-};
-int main(){
-    Number n1(10),n2(20),result;
-    cout<<"original values:"<<endl;
-    n1.display();
-    n2.display();
-    result=n1+n2;
-cout<<"after binary+operator(n1+n2):"<<endl;
-result.display();
-result=-n1;
-cout<<"after unary-operator(-n1):"<<endl;
-result.display();
+cout << "Program continues after exception handling." <<endl;
 return 0;
 }
-
