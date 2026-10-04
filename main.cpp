@@ -1,28 +1,33 @@
 #include <iostream>
 using namespace std;
-class Rectangle {
+class Student {
 private:
-int length;
-int width;
+string name;
+int roll;
 public:
-// Constructor to initialize length and width
-Rectangle(int l, int w) {
-length = l;
-width = w;
+// Constructor
+Student(string n, int r) {
+name = n;
+roll = r;
+cout << "Constructor called for " << name << endl;
 }
-// Declare friend function
-friend int calculateArea(Rectangle r);
+// Member function to display student details
+void display() {
+cout << "Name: " << name << ", Roll: " << roll << endl;
+}
+// Destructor
+~Student() {
+cout << "Destructor called for " << name << endl;
+}
 };
-// Friend function definition
-int calculateArea(Rectangle r) {
-// Accessing private members of class Rectangle
-return r.length * r.width;
-}
 int main() {
-Rectangle rect(10, 5); // Create object with length 10 and
-
-// Call friend function
-int area = calculateArea(rect);
-cout << "Area of Rectangle = " << area << endl;
+Student s1("Alice", 101); // Constructor is called
+Student s2("Bob", 102); // Constructor is called
+s1.display();
+s2.display();
+// When main() ends, destructors are called automatically
+13
 return 0;
 }
+Output:
+Constructor called for Alice
