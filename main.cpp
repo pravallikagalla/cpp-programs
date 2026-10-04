@@ -1,22 +1,28 @@
 #include <iostream>
 using namespace std;
-// Recursive function to find factorial
-int factorial(int n) {
-if (n <= 1)
-return 1;
-else
-return n * factorial(n - 1);
+class Rectangle {
+private:
+int length;
+int width;
+public:
+// Constructor to initialize length and width
+Rectangle(int l, int w) {
+length = l;
+width = w;
+}
+// Declare friend function
+friend int calculateArea(Rectangle r);
+};
+// Friend function definition
+int calculateArea(Rectangle r) {
+// Accessing private members of class Rectangle
+return r.length * r.width;
 }
 int main() {
-int number;
-cout << "Enter a number: ";
-cin >> number;
-if (number < 0) {
-cout << "Factorial is not defined for negative numbers." <<
-endl;
-} else {
-int result = factorial(number);
-cout << "Factorial of " << number << " = " << result << endl;
-}
+Rectangle rect(10, 5); // Create object with length 10 and
+
+// Call friend function
+int area = calculateArea(rect);
+cout << "Area of Rectangle= " << area << endl;
 return 0;
 }
